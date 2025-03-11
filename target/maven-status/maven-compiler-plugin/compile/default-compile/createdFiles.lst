@@ -6,6 +6,7 @@ com\nahdaicue\peluqueriacanina\igu\ModificarDatos$7.class
 com\nahdaicue\peluqueriacanina\igu\ModificarDatos.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos$2.class
 com\nahdaicue\peluqueriacanina\igu\VerDatos$3.class
+com\nahdaicue\peluqueriacanina\igu\VerDatos$5.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos.class
 com\nahdaicue\peluqueriacanina\igu\ModificarDatos$3.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos$5.class
@@ -22,6 +23,7 @@ com\nahdaicue\peluqueriacanina\igu\Principal$2.class
 com\nahdaicue\peluqueriacanina\igu\VerDatos$2.class
 com\nahdaicue\peluqueriacanina\igu\ModificarDatos$4.class
 com\nahdaicue\peluqueriacanina\persistencia\ControladoraPersistencia.class
+com\nahdaicue\peluqueriacanina\igu\VerDatos$7.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos$6.class
 com\nahdaicue\peluqueriacanina\Peluqueriacanina.class
 com\nahdaicue\peluqueriacanina\igu\ModificarDatos$2.class
@@ -29,6 +31,7 @@ com\nahdaicue\peluqueriacanina\igu\VerDatos$4.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos$1.class
 com\nahdaicue\peluqueriacanina\igu\CargaDatos$4.class
 com\nahdaicue\peluqueriacanina\persistencia\MascotaJpaController.class
+com\nahdaicue\peluqueriacanina\igu\VerDatos$6.class
 com\nahdaicue\peluqueriacanina\logica\Controladora.class
 com\nahdaicue\peluqueriacanina\logica\Duenio_.class
 com\nahdaicue\peluqueriacanina\persistencia\exceptions\IllegalOrphanException.class

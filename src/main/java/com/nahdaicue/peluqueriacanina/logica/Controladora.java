@@ -1,6 +1,7 @@
 package com.nahdaicue.peluqueriacanina.logica;
 
 import com.nahdaicue.peluqueriacanina.persistencia.ControladoraPersistencia;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controladora {
@@ -74,4 +75,19 @@ public class Controladora {
         controlPersis.modificarDuenio(duenio);
     }
 
+    public List<Mascota> buscarMascotas(String filtro) {
+    List<Mascota> todasMascotas = traerMascotas();  // Obtener todas las mascotas
+    List<Mascota> filtrados = new ArrayList<>();
+
+    // Filtrar por nombre, raza y duenio
+    for (Mascota mascota : todasMascotas) {
+        if (mascota.getNombre().toLowerCase().contains(filtro.toLowerCase()) ||
+            mascota.getRaza().toLowerCase().contains(filtro.toLowerCase()) ||
+            mascota.getUnDuenio().getNombre().toLowerCase().contains(filtro.toLowerCase())) {
+            filtrados.add(mascota);
+        }
+    }
+
+    return filtrados;
+}
 }
