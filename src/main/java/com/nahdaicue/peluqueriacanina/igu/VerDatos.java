@@ -2,7 +2,9 @@ package com.nahdaicue.peluqueriacanina.igu;
 
 import com.nahdaicue.peluqueriacanina.logica.Controladora;
 import com.nahdaicue.peluqueriacanina.logica.Mascota;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -13,6 +15,9 @@ public class VerDatos extends javax.swing.JFrame {
 
     Controladora control = null;
     List<Mascota> listaMascota = null;
+    
+    // Uso clave:valor porque sino se desincronizan los datos.
+    private Map<Integer, Integer> mapaIds = new HashMap<>(); 
 
     public VerDatos() {
         control = new Controladora();
@@ -202,7 +207,7 @@ public class VerDatos extends javax.swing.JFrame {
             if (tablaMascotas.getSelectedRow() != -1) {
 
                 //De Object -> String -> int
-                int num_cliente = Integer.parseInt(String.valueOf(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0)));
+                int num_cliente = mapaIds.get(tablaMascotas.getSelectedRow());
 
                 ModificarDatos pantallaModif = new ModificarDatos(num_cliente);
                 pantallaModif.setVisible(true);
@@ -233,7 +238,7 @@ public class VerDatos extends javax.swing.JFrame {
             if (tablaMascotas.getSelectedRow() != -1) {
 
                 //De Object -> String -> int
-                int num_cliente = Integer.parseInt(String.valueOf(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0)));
+                int num_cliente = mapaIds.get(tablaMascotas.getSelectedRow());
                 control.borrarMascota(num_cliente);
 
                 //Mostrar mensaje
@@ -254,7 +259,8 @@ public class VerDatos extends javax.swing.JFrame {
         //AAAAAAAAAAAAAAAAAAAAAAAA
 
     }//GEN-LAST:event_txtBuscarActionPerformed
-
+    
+    //Filtro de buscar
     public void filtrarTabla() {
         String filtro = txtBuscar.getText();  // Obtener el texto del campo de búsqueda
         List<Mascota> mascotasFiltradas = control.buscarMascotas(filtro);  // Llamar al método de la controladora
@@ -267,15 +273,24 @@ public class VerDatos extends javax.swing.JFrame {
             }
         };
 
-        String titulos[] = {"Id", "Nombre", "Color", "Raza", "Alergico", "At. Esp.", "Dueño", "Cel"};
+        String titulos[] = {"Nombre", "Color", "Raza", "Alergico", "At. Esp.", "Dueño", "Cel"};
         modeloTabla.setColumnIdentifiers(titulos);
+        
+        mapaIds.clear();
 
         // Recorro las mascotas filtradas y las agrego a la tabla
         for (Mascota masco : mascotasFiltradas) {
-            Object[] objeto = {masco.getNum_cliente(),masco.getNombre(), masco.getColor(),
+            
+            int fila = 0;
+            
+            mapaIds.put(fila, masco.getNum_cliente());
+            
+            Object[] objeto = {masco.getNombre(), masco.getColor(),
                 masco.getRaza(), masco.getAlergico(), masco.getAtencion_especial(),
                 masco.getUnDuenio().getNombre(), masco.getUnDuenio().getCelDuenio()};
             modeloTabla.addRow(objeto);
+            
+            fila++;
         }
 
         tablaMascotas.setModel(modeloTabla);  // Asigno el modelo de la tabla filtrada
@@ -307,21 +322,32 @@ public class VerDatos extends javax.swing.JFrame {
             }
         };
 
-        String titulos[] = {"Id","Nombre", "Color", "Raza", "Alergico", "At. Esp.", "Dueño", "Cel"};
+        
+        String titulos[] = {"Nombre", "Color", "Raza", "Alergico", "At. Esp.", "Dueño", "Cel"};
         modeloTabla.setColumnIdentifiers(titulos);
 
         //Carga de datos
         List<Mascota> listaMascota = control.traerMascotas();
+        
+         mapaIds.clear();
 
         //Recorrer la lista y guardarla dentro de un objeto
         if (listaMascota != null) {
+            
+            int fila = 0;
+            
             for (Mascota masco : listaMascota) {
-                Object[] objeto = {masco.getNum_cliente(), masco.getNombre(), masco.getColor(),
+                
+                mapaIds.put(fila, masco.getNum_cliente());
+                
+                Object[] objeto = {masco.getNombre(), masco.getColor(),
                     masco.getRaza(), masco.getAlergico(), masco.getAtencion_especial(),
                     masco.getUnDuenio().getNombre(), masco.getUnDuenio().getCelDuenio()};
 
                 //Añadir datos a la filas
                 modeloTabla.addRow(objeto);
+                
+                 fila++;
             }
         }
         tablaMascotas.setModel(modeloTabla);
